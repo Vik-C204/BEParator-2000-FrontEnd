@@ -843,10 +843,11 @@ const ParticlesBack = () => {
             <Center> <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}> AND FINALLY... </Heading> </Center>
 
             <Center mt={"5vh"}> <Circle onClick={DeployToken} borderWidth={"1vh"} borderColor={"white"} as={Button} bg={"#F3BA2F"} size={"3xs"} colorScheme={"yellow"} color={"white"}> <VStack> <Heading> CREATE  </Heading> <Heading> TOKEN  </Heading></VStack> </Circle> </Center>
-            <Center> <Heading size={"md"} mt={"10vh"} color={"white"}> You will get a pop-up with your token address once it's deployed and verified </Heading> </Center>
-            <Center> <Heading size={"md"} mt={"10vh"} color={"white"}> But! </Heading> </Center>
-            <Center> <Heading size={"md"} mt={"3vh"} color={"#F3BA2F"}> If you ever miss it/forget it/lose it </Heading> </Center>
-            <Center> <Heading size={"md"} mt={"3vh"} color={"white"}> There's always </Heading> </Center>
+            <Center> <VStack> <Heading size={"md"} mt={"10vh"} color={"white"}> Once you get the notification about the success of your token deployment</Heading> <Heading size={"md"} mt={"10vh"} color={"white"}> usually within a few minutes </Heading> </VStack> </Center>
+
+            <Center> <Heading size={"md"} mt={"10vh"} color={"white"}> Or! </Heading> </Center>
+            <Center> <Heading size={"md"} mt={"3vh"} color={"#F3BA2F"}> If you ever miss/forget/lose your token address </Heading> </Center>
+            <Center> <Heading size={"md"} mt={"3vh"} color={"white"}> You can use </Heading> </Center>
 
             <Box>
              <Box mt={"15vh"}> <Center padding={"1vh"} mt={"1vh"} height={"100%"}> <VStack> <Heading color={"white"} size={"3xl"}> BEPENATOR LOOKUP </Heading>
