@@ -659,7 +659,7 @@ const ParticlesBack = () => {
             <Center> <HStack mt={"-17vh"} gap={"10vh"}> <SiBinance size={"10vh"} color={"#F3BA2F"}/> </HStack> </Center>
             <Center>
                 <Box >
-                    <Flex ml={"60vh"} gap={"5vh"}>
+                    <Flex direction={ isSmallerThan721 ? "column" : "row"} ml={"60vh"} gap={"5vh"}>
                         <Heading color={"white"}> A </Heading>
                         <Heading color={"#F3BA2F"}> Free & Customizable </Heading>
                         <Heading color={"white"}> BEP-20 </Heading>
