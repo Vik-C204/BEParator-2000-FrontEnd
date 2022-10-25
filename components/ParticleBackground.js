@@ -5,16 +5,16 @@ import { loadFull } from "tsparticles";
 import {
     Box,
     Button,
-    Center, Circle, Container,
+    Center, Circle,
     Flex, FormControl, FormErrorMessage,
     Heading,
     HStack,
     Input, ListItem,
     Radio,
-    RadioGroup, ScaleFade, Spacer, Spinner,
-    Stack, Switch,
-    Text, UnorderedList, useMediaQuery,
-    VStack
+    RadioGroup, ScaleFade,
+    Switch,
+    Text, UnorderedList,useMediaQuery,
+    VStack, Link
 } from "@chakra-ui/react";
 import "@fontsource/silkscreen/700.css"
 import Title from "./Title";
@@ -25,6 +25,9 @@ import {Form, Formik, Field} from "formik";
 import {useMoralis, useWeb3Contract} from "react-moralis";
 import abiOwned from "../constants/abiOwned.json"
 import abiRole from "../constants/abiRole.json"
+import { useNotification } from "web3uikit";
+import {FaGithub} from "react-icons/Fa";
+import NextLink from "next/link"
 
 const ParticlesBack = () => {
 
@@ -37,9 +40,9 @@ const ParticlesBack = () => {
 
     const [supply,setSupply] = useState("");
     const [ownership,setOwnership] = useState("");
-    const [canBurn,setCanBurn] = useState(null);
-    const [canMint,setCanMint] = useState(null);
-    const [canPause,setCanPause] = useState(null);
+    const [canBurn,setCanBurn] = useState(false);
+    const [canMint,setCanMint] = useState(false);
+    const [canPause,setCanPause] = useState(false);
 
     const [tokens, setTokens] = useState([])
     const [lookupOwnership,setLookupOwnership] = useState("");
@@ -47,8 +50,587 @@ const ParticlesBack = () => {
 
     const { isWeb3Enabled } = useMoralis()
     const [isSmallerThan721] = useMediaQuery("(max-width: 721px)")
+    const dispatch = useNotification();
 
-    const { data, runContractFunction: getTokens, isFetching } = useWeb3Contract({})
+    const { data, runContractFunction: getTokens,} = useWeb3Contract({})
+
+    const {runContractFunction: CreateNoOwnerFixedNoMintNoBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateNoOwnerFixedNoMintCanBurnNoPause} = useWeb3Contract({})
+
+    const {runContractFunction: CreateOwnedFixedNoMintNoBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedFixedNoMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedFixedNoMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedFixedNoMintCanBurnNoPause} = useWeb3Contract({})
+
+    const {runContractFunction: CreateOwnedUnlimitCanMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedUnlimitCanMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedUnlimitCanMintNoBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedUnlimitCanMintCanBurnNoPause} = useWeb3Contract({})
+
+    const {runContractFunction: CreateOwnedCappedCanMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedCappedCanMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedCappedCanMintCanBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateOwnedCappedCanMintNoBurnNoPause} = useWeb3Contract({})
+
+
+
+
+    const {runContractFunction: CreateRoleFixedNoMintNoBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleFixedNoMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleFixedNoMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleFixedNoMintCanBurnNoPause} = useWeb3Contract({})
+
+    const {runContractFunction: CreateRoleUnlimitCanMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleUnlimitCanMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleUnlimitCanMintNoBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleUnlimitCanMintCanBurnNoPause} = useWeb3Contract({})
+                                      
+    const {runContractFunction: CreateRoleCappedCanMintCanBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleCappedCanMintNoBurnCanPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleCappedCanMintCanBurnNoPause} = useWeb3Contract({})
+    const {runContractFunction: CreateRoleCappedCanMintNoBurnNoPause} = useWeb3Contract({})
+
+
+    const handleNewNotification = () => {
+        dispatch({
+            type: "info",
+            message: "You can now use Bepenator Lookup!",
+            title: "BEP-20 Deployed Successfully",
+            position: "topR",
+            icon: "bell",
+        });
+    };
+
+    const handleSuccess = async (tx) => {
+        await tx.wait(6);
+        handleNewNotification(tx);
+    };
+
+    const DeployToken = () => {
+        if (ownership === "none" && supply === "fixed" && canBurn === false) {
+            const newToken = async () => {
+                await CreateNoOwnerFixedNoMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateNoOwnerFixedNoMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "none" && supply === "fixed" && canBurn === true) {
+            const newToken = async () => {
+                await CreateNoOwnerFixedNoMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateNoOwnerFixedNoMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "fixed" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedFixedNoMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedFixedNoMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "fixed" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedFixedNoMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedFixedNoMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "fixed" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedFixedNoMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedFixedNoMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "fixed" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedFixedNoMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedFixedNoMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "unlim" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedUnlimitCanMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedUnlimitCanMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "unlim" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedUnlimitCanMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedUnlimitCanMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "unlim" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedUnlimitCanMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedUnlimitCanMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "unlim" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedUnlimitCanMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedUnlimitCanMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "capped" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedCappedCanMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedCappedCanMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "capped" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateOwnedCappedCanMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedCappedCanMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "capped" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedCappedCanMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedCappedCanMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "owned" && supply === "capped" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateOwnedCappedCanMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateOwnedCappedCanMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "fixed" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleFixedNoMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleFixedNoMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "fixed" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleFixedNoMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleFixedNoMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "fixed" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleFixedNoMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleFixedNoMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "fixed" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleFixedNoMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleFixedNoMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "unlim" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleUnlimitCanMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleUnlimitCanMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "unlim" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleUnlimitCanMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleUnlimitCanMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "unlim" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleUnlimitCanMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleUnlimitCanMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "unlim" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleUnlimitCanMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleUnlimitCanMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "capped" && canBurn === true && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleCappedCanMintCanBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleCappedCanMintCanBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "capped" && canBurn === false && canPause === true) {
+            const newToken = async () => {
+                await CreateRoleCappedCanMintNoBurnCanPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleCappedCanMintNoBurnCanPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "capped" && canBurn === true && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleCappedCanMintCanBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleCappedCanMintCanBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+        } else if (ownership === "role" && supply === "capped" && canBurn === false && canPause === false) {
+            const newToken = async () => {
+                await CreateRoleCappedCanMintNoBurnNoPause({
+                    params: {
+                        abi: abiOwned,
+                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        functionName: "CreateRoleCappedCanMintNoBurnNoPause",
+                        params: {
+                            name: name,
+                            symbol: symbol,
+                            initialSupply: initialSupply,
+                            owner: owner,
+                            decimals: decimals
+                        },
+                    },
+                    onSuccess: handleSuccess,
+                    onError: (error) => console.log(JSON.stringify(error)),
+                });
+            }
+            console.log(newToken())
+
+        }
+
+    }
 
 
     useEffect(() => {
@@ -86,9 +668,9 @@ const ParticlesBack = () => {
                 </Box>
             </Center>
             <Center> <Box borderRadius={"5"}  mt={"10vh"} borderColor={"#F3BA2F"} maxW={"50%"}>
-            <Text fontSize={"xl"} color={"white"} align={"center"}> Welcome to BEPenator-2000, a decentralised web app designed to allow anyone the creation and deployment of customizable BEP-20 token contracts on the Binance Smart Chain within
-                mere minutes,
-                Completely free of charge, requiring no setup, login, or coding. Was made to help people with no coding experience but a need for a BEP-20 token to create their own quickly and for free and to help fellow web3 developers save their time coding boilerplate code. Enjoy :)     </Text>
+            <Text fontSize={"xl"} color={"white"} align={"center"}> Welcome to BEPenator-2000, a decentralised web app designed to allow anyone the creation, deployment and automatic verification of custom BEP-20 token contracts on the Binance Smart Chain within
+                mere minutes.
+                Aside from the obligatory transaction cost on the Binance Smart Chain, completely free of charge requiring no setup, login, or coding. Was made to help people with no solidity coding experience but a need for a BEP-20 token to create their own quickly and for free and to help fellow web3 developers save their time coding boilerplate code. Enjoy :)     </Text>
             </Box> </Center>
             <Center>
             <Box
@@ -109,7 +691,7 @@ const ParticlesBack = () => {
                 <Flex width={"50vh"} direction={"column"} mr={"20vh"}>
                     <Heading size={"lg"} color={"white"}> Name: </Heading>
                     <Input focusBorderColor={"teal.500"} width={"50vh"} color={"white"} borderWidth={"0.5vh"} borderColor={"#F3BA2F"} onChange={event => setName(event.target.value)}/>
-                    <Text alignSelf={"flex-end"} color={"white"}> What your brand new token will be known as
+                    <Text alignSelf={"flex-end"} color={"white"}> What your token will be known as
                     </Text>
                 </Flex>
                 <Flex direction={"column"} ml={"20vh"} width={"50vh"}>
@@ -145,7 +727,7 @@ const ParticlesBack = () => {
                     <Flex direction={"column"} width={"50vh"} mr={"20vh"}>
                         <Heading size={"lg"} color={"white"}> Decimals: </Heading>
                         <Input focusBorderColor={"teal.500"} width={"50vh"} color={"white"} borderWidth={"0.5vh"} borderColor={"#F3BA2F"} onChange={event => setDecimals(event.target.value)}/>
-                        <Text alignSelf={"flex-end"} color={"white"}> Decimal precision for the token, recommended 18 </Text>
+                        <Text alignSelf={"flex-end"} color={"white"}> Recommended/Usually - 18 </Text>
                     </Flex>
                     <Flex direction={"column"} width={"50vh"} ml={"20vh"}>
                         <Heading size={"lg"} color={"white"}> Cap: </Heading>
@@ -260,7 +842,7 @@ const ParticlesBack = () => {
 
             <Center> <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}> AND FINALLY... </Heading> </Center>
 
-            <Center mt={"5vh"}> <Circle borderWidth={"1vh"} borderColor={"white"} as={Button} bg={"#F3BA2F"} size={"3xs"} colorScheme={"yellow"} color={"white"}> <VStack> <Heading> CREATE  </Heading> <Heading> TOKEN  </Heading></VStack> </Circle> </Center>
+            <Center mt={"5vh"}> <Circle onClick={DeployToken} borderWidth={"1vh"} borderColor={"white"} as={Button} bg={"#F3BA2F"} size={"3xs"} colorScheme={"yellow"} color={"white"}> <VStack> <Heading> CREATE  </Heading> <Heading> TOKEN  </Heading></VStack> </Circle> </Center>
             <Center> <Heading size={"md"} mt={"10vh"} color={"white"}> You will get a pop-up with your token address once it's deployed and verified </Heading> </Center>
             <Center> <Heading size={"md"} mt={"10vh"} color={"white"}> But! </Heading> </Center>
             <Center> <Heading size={"md"} mt={"3vh"} color={"#F3BA2F"}> If you ever miss it/forget it/lose it </Heading> </Center>
@@ -380,9 +962,17 @@ const ParticlesBack = () => {
                 </UnorderedList> </Center>
 
              </Box>
-            <Box height={"80vh"}> </Box>
-
-
+            <Box height={"29vh"}> </Box>
+            <Center mb={"1"}>
+                <HStack>
+                    <Text color={"#F3BA2F"}> Copyright © 2022 vik-c024 </Text>
+                    <NextLink href="https://github.com/vik-c204" passHref>
+                        <Link>
+                            <FaGithub size={"3vh"} color={"#F3BA2F"}/>
+                        </Link>
+                    </NextLink>
+                </HStack>
+            </Center>
 
 
 
