@@ -18,15 +18,15 @@ import {
 } from "@chakra-ui/react";
 import "@fontsource/silkscreen/700.css"
 import Title from "./Title";
-import { SiBinance } from 'react-icons/Si';
-import { BsArrowRight } from 'react-icons/Bs'
+import { SiBinance } from 'react-icons/si';
+import { BsArrowRight } from 'react-icons/bs'
 import { ConnectButton } from "web3uikit";
 import {Form, Formik, Field} from "formik";
 import {useMoralis, useWeb3Contract} from "react-moralis";
 import abiOwned from "../constants/abiOwned.json"
 import abiRole from "../constants/abiRole.json"
 import { useNotification } from "web3uikit";
-import {FaGithub} from "react-icons/Fa";
+import {FaGithub} from "react-icons/fa";
 import NextLink from "next/link"
 
 const ParticlesBack = () => {
@@ -319,7 +319,8 @@ const ParticlesBack = () => {
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -339,7 +340,8 @@ const ParticlesBack = () => {
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -359,7 +361,8 @@ const ParticlesBack = () => {
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -379,7 +382,8 @@ const ParticlesBack = () => {
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -392,7 +396,7 @@ const ParticlesBack = () => {
                 await CreateRoleFixedNoMintNoBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintNoBurnNoPause",
                         params: {
                             name: name,
@@ -412,7 +416,7 @@ const ParticlesBack = () => {
                 await CreateRoleFixedNoMintNoBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintNoBurnCanPause",
                         params: {
                             name: name,
@@ -432,7 +436,7 @@ const ParticlesBack = () => {
                 await CreateRoleFixedNoMintCanBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintCanBurnNoPause",
                         params: {
                             name: name,
@@ -452,7 +456,7 @@ const ParticlesBack = () => {
                 await CreateRoleFixedNoMintCanBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintCanBurnCanPause",
                         params: {
                             name: name,
@@ -472,7 +476,7 @@ const ParticlesBack = () => {
                 await CreateRoleUnlimitCanMintCanBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintCanBurnCanPause",
                         params: {
                             name: name,
@@ -492,7 +496,7 @@ const ParticlesBack = () => {
                 await CreateRoleUnlimitCanMintNoBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintNoBurnCanPause",
                         params: {
                             name: name,
@@ -512,7 +516,7 @@ const ParticlesBack = () => {
                 await CreateRoleUnlimitCanMintNoBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintNoBurnNoPause",
                         params: {
                             name: name,
@@ -532,7 +536,7 @@ const ParticlesBack = () => {
                 await CreateRoleUnlimitCanMintCanBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintCanBurnNoPause",
                         params: {
                             name: name,
@@ -552,14 +556,15 @@ const ParticlesBack = () => {
                 await CreateRoleCappedCanMintCanBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintCanBurnCanPause",
                         params: {
                             name: name,
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -572,14 +577,15 @@ const ParticlesBack = () => {
                 await CreateRoleCappedCanMintNoBurnCanPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintNoBurnCanPause",
                         params: {
                             name: name,
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -592,14 +598,15 @@ const ParticlesBack = () => {
                 await CreateRoleCappedCanMintCanBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintCanBurnNoPause",
                         params: {
                             name: name,
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
@@ -612,14 +619,15 @@ const ParticlesBack = () => {
                 await CreateRoleCappedCanMintNoBurnNoPause({
                     params: {
                         abi: abiOwned,
-                        contractAddress: "0xA5632246941Fbf53A54962A757B86a569A37764c",
+                        contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintNoBurnNoPause",
                         params: {
                             name: name,
                             symbol: symbol,
                             initialSupply: initialSupply,
                             owner: owner,
-                            decimals: decimals
+                            decimals: decimals,
+                            _cap: cap
                         },
                     },
                     onSuccess: handleSuccess,
