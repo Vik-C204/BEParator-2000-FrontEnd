@@ -395,7 +395,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleFixedNoMintNoBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintNoBurnNoPause",
                         params: {
@@ -415,7 +415,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleFixedNoMintNoBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintNoBurnCanPause",
                         params: {
@@ -435,7 +435,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleFixedNoMintCanBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintCanBurnNoPause",
                         params: {
@@ -455,7 +455,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleFixedNoMintCanBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleFixedNoMintCanBurnCanPause",
                         params: {
@@ -475,7 +475,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleUnlimitCanMintCanBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintCanBurnCanPause",
                         params: {
@@ -495,7 +495,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleUnlimitCanMintNoBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintNoBurnCanPause",
                         params: {
@@ -515,7 +515,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleUnlimitCanMintNoBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintNoBurnNoPause",
                         params: {
@@ -535,7 +535,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleUnlimitCanMintCanBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleUnlimitCanMintCanBurnNoPause",
                         params: {
@@ -555,7 +555,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleCappedCanMintCanBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintCanBurnCanPause",
                         params: {
@@ -576,7 +576,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleCappedCanMintNoBurnCanPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintNoBurnCanPause",
                         params: {
@@ -597,7 +597,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleCappedCanMintCanBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintCanBurnNoPause",
                         params: {
@@ -618,7 +618,7 @@ const ParticlesBack = () => {
             const newToken = async () => {
                 await CreateRoleCappedCanMintNoBurnNoPause({
                     params: {
-                        abi: abiOwned,
+                        abi: abiRole,
                         contractAddress: "0x202Ec2Ace922B3Dd533284f15A84E45bF1891476",
                         functionName: "CreateRoleCappedCanMintNoBurnNoPause",
                         params: {
