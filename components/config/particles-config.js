@@ -558,7 +558,7 @@
          particles: {},
          position: {
              x: 50,
-             y: 30
+             y: 0
          },
          spawnColor: {
              value: "#ff0000",
