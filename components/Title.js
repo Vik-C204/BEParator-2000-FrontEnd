@@ -9,12 +9,12 @@ const Title = () => {
     return ( isSmallerThan721 ? <Center> <VStack>
 
             <Flex>
-                <Heading size={"4xl"} color={"#F3BA2F"} letterSpacing={"1vh"}> BEP </Heading>
-                <Heading size={"4xl"} color={"white"} letterSpacing={"1vh"}> ERATOR </Heading>
+                <Heading size={"3xl"} color={"#F3BA2F"} letterSpacing={"1vh"}> BEP </Heading>
+                <Heading size={"3xl"} color={"white"} letterSpacing={"1vh"}> ERATOR </Heading>
             </Flex>
 
-                <Flex> <Heading size={"4xl"} color={"#F3BA2F"} letterSpacing={"1vh"}> 20 </Heading>
-                <Heading size={"4xl"} color={"white"} letterSpacing={"1vh"}> 00 </Heading> </Flex>
+                <Flex> <Heading size={"3xl"} color={"#F3BA2F"} letterSpacing={"1vh"}> 20 </Heading>
+                <Heading size={"3xl"} color={"white"} letterSpacing={"1vh"}> 00 </Heading> </Flex>
                 </VStack>
             </Center> :
             <Flex direction={"column"} alignItems={"center"} rowGap={"20vh"}>

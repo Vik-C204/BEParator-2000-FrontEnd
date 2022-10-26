@@ -676,7 +676,10 @@ const ParticlesBack = () => {
                 <Box >
                     <Flex direction={ isSmallerThan721 ? "column" : "row"} ml={isSmallerThan721 ? 0 :"60vh"} gap={"5vh"} alignItems={"center"}>
                         {isSmallerThan721 ? <> </> : <Heading color={"white"}> A </Heading>}
-                        <Heading mt={isSmallerThan721 ? "2vh" : 0} color={"#F3BA2F"}> Free & Customizable </Heading>
+                        {isSmallerThan721? <VStack> <Heading mt={"2vh"} color={"#F3BA2F"}> Free  </Heading>
+                            <Heading mt={"2vh"} color={"white"}> &  </Heading>
+                            <Heading mt={"2vh"} color={"#F3BA2F"}>Customizable </Heading>
+                        </VStack> : <Heading color={"#F3BA2F"}> Free & Customizable </Heading> }
                         <Heading color={"white"}> BEP-20 </Heading>
                         <Heading color={"#F3BA2F"}> Token generator </Heading>
                     </Flex>
@@ -705,7 +708,7 @@ const ParticlesBack = () => {
 
                 <VStack gap={"10vh"}>
 
-                    <Flex width={"50vh"} direction={"column"}>
+                    <Flex width={"100%"} direction={"column"}>
                         <Heading size={"lg"} color={"white"}> Name: </Heading>
                         <Input focusBorderColor={"teal.500"} width={"50vh"} color={"white"} borderWidth={"0.5vh"} borderColor={"#F3BA2F"} onChange={event => setName(event.target.value)}/>
                         <Text alignSelf={"flex-end"} color={"white"}> What your token will be known as
@@ -909,7 +912,7 @@ const ParticlesBack = () => {
 
             <Box>
                 <Box mt={"15vh"}> <Center padding={"1vh"} mt={"1vh"} height={"100%"}> <VStack> {isSmallerThan721 ? <VStack> <Heading color={"white"} size={"3xl"}> BEPENATOR  </Heading>  <Heading color={"white"} size={"3xl"}> LOOKUP </Heading></VStack> : <Heading color={"white"} size={"3xl"}> BEPENATOR LOOKUP </Heading>}
-             <HStack> <Center> <Heading size={"lg"} color={"white"}> {isSmallerThan721? "Owner" :"Owner Address"} </Heading> <BsArrowRight color={"#F3BA2F"} size={"10vh"}/> <Heading size={"lg"} color={"white"}> Tokens Created  </Heading> </Center> </HStack> </VStack>
+             <HStack> <Center> <Heading size={"lg"} color={"white"}> {isSmallerThan721? "Owner" :"Owner Address"} </Heading> <BsArrowRight color={"#F3BA2F"} size={"10vh"}/> <Heading size={"lg"} color={"white"}> {isSmallerThan721? "Tokens" :"Tokens Created"}  </Heading> </Center> </HStack> </VStack>
              </Center> </Box>
                     <VStack width={"100%"} height={"10vh"} marginTop={"5vh"}>
 
@@ -986,16 +989,16 @@ const ParticlesBack = () => {
                                             </FormControl>
                                         )}
                                     </Field>
-                                    <Button
+                                    <Center> <Button
                                         mt={"2vh"}
-                                        width={"100%"}
+                                        width={"90%"}
                                         height={"7vh"}
                                         disabled={isSubmitting || lookupOwnership === ""}
                                         type="submit"
                                         colorScheme={"yellow"}
                                     >
                                         Search Tokens
-                                    </Button>
+                                    </Button> </Center>
                                 </Form>
                             )}
                         </Formik>
