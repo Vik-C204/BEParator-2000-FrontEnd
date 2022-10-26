@@ -884,7 +884,7 @@ const ParticlesBack = () => {
                     <Heading color={"#F3BA2F"}> MINTABLE? </Heading>
                     <HStack>
                         <Heading color={"white"}> NO </Heading>
-                        <Switch size={"lg"} isDisabled={ ownership === 'none' } colorScheme={"yellow"} onChange={(e) => setCanMint(e.target.checked)}>  </Switch>
+                        <Switch size={"lg"} isDisabled={ true } isChecked={ supply === "unlim" || supply === "capped"} colorScheme={"yellow"} onChange={(e) => setCanMint(e.target.checked)}>  </Switch>
                         <Heading color={"white"}> YES </Heading>
                     </HStack>
                 </VStack> </ScaleFade>
