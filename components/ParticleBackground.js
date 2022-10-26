@@ -1,5 +1,6 @@
 import Particles from "react-particles";
 import particlesConfig from "./config/particles-config";
+import particlesConfigMobile from "./config/particles-config-mobile";
 import {useCallback, useEffect, useState} from "react";
 import { loadFull } from "tsparticles";
 import {
@@ -669,7 +670,7 @@ const ParticlesBack = () => {
     return (
         <Box>
         <Particles id="tsparticles" init={particlesInit} loaded={particlesLoaded}
-        options={particlesConfig}/> <Center mt={ isSmallerThan721? "7" :"10vh"}> <Box width={"80%"}>
+        options={ isSmallerThan721 ? particlesConfigMobile : particlesConfig}/> <Center mt={ isSmallerThan721? "7" :"10vh"}> <Box width={"80%"}>
             <Title />
             <Center> <HStack mt={isSmallerThan721? "2vh": "-17vh"} gap={"10vh"}> <Circle bg={"white"} size={"xm"}> <SiBinance size={"10vh"} color={"#F3BA2F"}/> </Circle> </HStack> </Center>
             <Center>
@@ -830,7 +831,7 @@ const ParticlesBack = () => {
                 </Flex> </Center>
             </RadioGroup>
 
-            <Center> <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}> CHOOSE OWNERSHIP </Heading> </Center>
+            <Center> {isSmallerThan721? <VStack> <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}> CHOOSE </Heading> <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}>OWNERSHIP </Heading> </VStack> : <Heading size={"xl"} mt={"20vh"} color={"#F3BA2F"}> CHOOSE OWNERSHIP </Heading> }</Center>
             <RadioGroup onChange={setOwnership} value={ownership}>
                 <Center> <Flex mt={"10vh"} direction={isSmallerThan721 ? "column" : "row"} rowGap={"5vh"}>
 
