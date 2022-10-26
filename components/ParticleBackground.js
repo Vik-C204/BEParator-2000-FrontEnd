@@ -42,7 +42,7 @@ const ParticlesBack = () => {
     const [supply,setSupply] = useState("");
     const [ownership,setOwnership] = useState("");
     const [canBurn,setCanBurn] = useState(false);
-    const [canMint,setCanMint] = useState(false);
+    const [canMint,setCanMint] = useState(false); // funnily enough you never have to choose as ownership and suppply are wha sets it
     const [canPause,setCanPause] = useState(false);
 
     const [tokens, setTokens] = useState([])
@@ -106,7 +106,8 @@ const ParticlesBack = () => {
         await tx.wait(6);
         handleNewNotification(tx);
     };
-
+    /* Runs after you press create token
+    26 different versions of the contract depending on parameters*/
     const DeployToken = () => {
         if (ownership === "none" && supply === "fixed" && canBurn === false) {
             const newToken = async () => {
@@ -670,7 +671,7 @@ const ParticlesBack = () => {
     return (
         <Box>
         <Particles id="tsparticles" init={particlesInit} loaded={particlesLoaded}
-        options={ isSmallerThan721 ? particlesConfigMobile : particlesConfig}/> <Center mt={ isSmallerThan721? "7" :"10vh"}> <Box width={"80%"}>
+        options={particlesConfig}/> <Center mt={ isSmallerThan721? "7" :"10vh"}> <Box width={"80%"}>
             <Title />
             <Center> <HStack mt={isSmallerThan721? "2vh": "-17vh"} gap={"10vh"}> <Circle bg={"white"} size={"xm"}> <SiBinance size={"10vh"} color={"#F3BA2F"}/> </Circle> </HStack> </Center>
             <Center>
